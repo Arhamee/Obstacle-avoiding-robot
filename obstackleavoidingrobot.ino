@@ -8,10 +8,10 @@ NewPing sonar(TRIGGER_PIN, ECHO_PIN, MAX_DISTANCE);
 
  int distance ;
 
-const int Motor1 = 2 ;
-const int Motor2 = 3 ;
-const int Motor3 = 4 ;
-const int Motor4 = 5 ;
+const int Motor1 = 3 ;
+const int Motor2 = 4 ;
+const int Motor3 = 5 ;
+const int Motor4 = 6 ;
 
  Servo myServo ;
 
@@ -30,10 +30,10 @@ void loop() {
       int Rdistance = 0 ;
       int Ldistance = 0 ;
       delay(50);
-  if(distance > 10){
+  if(distance > 31){
     MoveForward() ;
   }
-  else if(distance <= 10){
+  else if(distance <= 30){
      moveStop() ;
      delay(300) ;
      MoveBackward() ;
@@ -46,36 +46,36 @@ void loop() {
     delay(100);
   if(Ldistance > Rdistance){
     MoveLeft() ;
-    delay(100);
+    delay(300);
     moveStop();
   }
   else if (Ldistance < Rdistance){
     MoveRight() ;
-    delay(100);
+    delay(300);
     moveStop();
   }
   }
   delay(100);
 }
-void MoveForward(){
+void  MoveBackward(){
    digitalWrite(Motor1, HIGH);
    digitalWrite(Motor2, LOW);
    digitalWrite(Motor3, HIGH);
    digitalWrite(Motor4, LOW);
 }
-void MoveBackward(){
+void MoveForward(){
    digitalWrite(Motor1, LOW);
    digitalWrite(Motor2, HIGH);
    digitalWrite(Motor3, LOW);
    digitalWrite(Motor4, HIGH);
 }
-void MoveLeft(){
+void MoveRight(){
    digitalWrite(Motor1, LOW);
    digitalWrite(Motor2, HIGH);
    digitalWrite(Motor3, HIGH);
    digitalWrite(Motor4, LOW);
 }
-void MoveRight(){
+void MoveLeft(){
    digitalWrite(Motor1, HIGH);
    digitalWrite(Motor2, LOW);
    digitalWrite(Motor3, LOW);
@@ -88,7 +88,7 @@ void moveStop(){
   digitalWrite(Motor4, LOW);
 }
 int lookRight(){
-  myServo.write(40);   
+  myServo.write(0);   
   delay(300) ;
   int dist = sonar.ping_cm();
     delay(100) ;
@@ -97,7 +97,7 @@ int lookRight(){
      return dist ;
 }
 int lookLeft(){
-    myServo.write(140);   
+    myServo.write(180);   
       delay(300) ;
     int dist = sonar.ping_cm();
       delay(100) ;
